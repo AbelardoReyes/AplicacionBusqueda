@@ -26,19 +26,5 @@
         "selector": "form.nav-search"
       }
     ]
-  },
-  "cyberpuerta": {
-    "url": "https://www.cyberpuerta.mx",
-    "actions": [
-      {
-        "action": "send_keys",
-        "selector": "input[name='searchparam']",
-        "value": "laptop"
-      },
-      {
-        "action": "submit",
-        "selector": "form[action='/search']"
-      }
-    ]
   }
 }
