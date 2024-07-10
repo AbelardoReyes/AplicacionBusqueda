@@ -1,0 +1,44 @@
+{
+  "amazon": {
+    "url": "https://www.amazon.com.mx",
+    "actions": [
+      {
+        "action": "send_keys",
+        "selector": "#twotabsearchtextbox",
+        "value": "laptop"
+      },
+      {
+        "action": "submit",
+        "selector": "#nav-search-bar-form"
+      }
+    ]
+  },
+  "mercadolibre": {
+    "url": "https://www.mercadolibre.com.mx",
+    "actions": [
+      {
+        "action": "send_keys",
+        "selector": "input[name='as_word']",
+        "value": "laptop"
+      },
+      {
+        "action": "submit",
+        "selector": "form.nav-search"
+      }
+    ]
+  },
+  "cyberpuerta": {
+    "url": "https://www.cyberpuerta.mx",
+    "actions": [
+      {
+        "action": "send_keys",
+        "selector": "input[name='searchparam']",
+        "value": "laptop"
+      },
+      {
+        "action": "submit",
+        "selector": "form[action='/search']"
+      }
+    ]
+  }
+}
