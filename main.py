@@ -1,4 +1,3 @@
-# main.py
 import json
 from web_scraper import WebScraper
 
