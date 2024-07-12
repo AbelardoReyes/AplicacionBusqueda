@@ -5,15 +5,11 @@
       {
         "action": "send_keys",
         "selector": "input[name='as_word']",
-        "value": "Nintendo Switch"
+        "value": "Laptops"
       },
       {
         "action": "submit",
         "selector": "form.nav-search"
-      },
-      {
-        "action": "click",
-        "selector": "a.ui-search-link[title*='Hasta 4000']"
       }
     ],
     "fields": {
@@ -21,8 +17,25 @@
       "price": ".ui-search-price__second-line .andes-money-amount__fraction",
       "currency": ".ui-search-price__second-line .andes-money-amount__currency-symbol",
       "list_price": ".andes-money-amount--previous .andes-money-amount__fraction",
-      "list_currency": ".andes-money-amount--previous .andes-money-amount__currency-symbol",
+      "list_currency": ".ui-search-price__second-line .andes-money-amount__currency-symbol",
       "rating": ".ui-search-reviews__rating-number"
     }
+  },
+  "FireEmblem": {
+    "url": "https://www.fireemblemwod.com/fe7.htm",
+    "actions": [
+      {
+        "action": "click",
+        "selector": "a[href='fe7/personajesfe7.htm']"
+      },
+      {
+        "action": "click",
+        "selector": "a[href='personajes/Eliwood.htm']"
+      }
+    ],
+    "fields": {
+      "table": "table.w1acb1.imgmiddletd"
+    },
+    "type": "table"
   }
 }
