@@ -15,8 +15,6 @@
     "fields": {
       "title": ".ui-search-item__title",
       "price": ".ui-search-price__second-line .andes-money-amount__fraction",
-      "currency": ".ui-search-price__second-line .andes-money-amount__currency-symbol",
-      "list_price": ".andes-money-amount--previous .andes-money-amount__fraction",
       "list_currency": ".ui-search-price__second-line .andes-money-amount__currency-symbol",
       "rating": ".ui-search-reviews__rating-number"
     }
