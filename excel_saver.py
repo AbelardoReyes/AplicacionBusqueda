@@ -11,5 +11,6 @@ class ExcelSaver:
             self.data.append(data)
 
     def save_to_excel(self):
-        df = pd.DataFrame(self.data)
-        df.to_excel(self.file_name, index=False)
+        if self.data:
+            df = pd.DataFrame(self.data)
+            df.to_excel(self.file_name, index=False)

@@ -17,23 +17,10 @@
       "price": ".ui-search-price__second-line .andes-money-amount__fraction",
       "list_currency": ".ui-search-price__second-line .andes-money-amount__currency-symbol",
       "rating": ".ui-search-reviews__rating-number"
-    }
-  },
-  "FireEmblem": {
-    "url": "https://www.fireemblemwod.com/fe7.htm",
-    "actions": [
-      {
-        "action": "click",
-        "selector": "a[href='fe7/personajesfe7.htm']"
-      },
-      {
-        "action": "click",
-        "selector": "a[href='personajes/Eliwood.htm']"
-      }
-    ],
-    "fields": {
-      "table": "table.w1acb1.imgmiddletd"
     },
-    "type": "table"
+    "pagination": {
+      "next_button_selector": ".andes-pagination__button.andes-pagination__button--next a"
+    },
+    "max_pages": 3
   }
 }
