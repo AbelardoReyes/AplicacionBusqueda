@@ -21,6 +21,29 @@
     "pagination": {
       "next_button_selector": ".andes-pagination__button.andes-pagination__button--next a"
     },
-    "max_pages": 3
+    "max_pages": 2
+  },
+  "FireEmblem": {
+    "url": "https://www.fireemblemwod.com/fe7.htm",
+    "actions": [
+      {
+        "action": "click",
+        "selector": "a[href='fe7/personajesfe7.htm']"
+      },
+      {
+        "action": "click",
+        "selector": "a[href='personajes/Eliwood.htm']"
+      }
+    ],
+    "fields": {
+      "Estadisticas": "Estadísticas",
+      "PV": "PV",
+      "Fue_Mag": "Fue, Mag",
+      "Hab": "Hab",
+      "Vel": "Vel",
+      "Sue": "Sue",
+      "Def": "Def",
+      "Res": "Res"
+    }
   }
 }

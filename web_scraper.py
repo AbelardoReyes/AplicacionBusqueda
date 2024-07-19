@@ -28,26 +28,27 @@ class WebScraper:
                 self.driver.implicitly_wait(5)
                 excel_saver = ExcelSaver(site)
                 
-                current_page = 1
-                max_pages = details.get('max_pages', 1)
-                next_button_selector = details['pagination']['next_button_selector']
+                if 'pagination' in details and 'max_pages' in details:
+                    current_page = 1
+                    max_pages = details.get('max_pages', 1)
+                    next_button_selector = details['pagination']['next_button_selector']
+                    
+                    while current_page <= max_pages:
+                        self.extract_field_data(site, details, excel_saver)
+                        
+                        if current_page < max_pages:
+                            try:
+                                next_button = self.driver.find_element(By.CSS_SELECTOR, next_button_selector)
+                                next_button.click()
+                                time.sleep(2)
+                            except Exception as e:
+                                print(f"No se pudo encontrar o hacer clic en el botón de 'Siguiente': {e}")
+                                break
+                        
+                        current_page += 1
                 
-                while current_page <= max_pages:
-                    if details.get('type') == 'table':
-                        self.extract_table_data(site, details['fields']['table'], excel_saver)
-                    else:
-                        self.extract_field_data(site, details['fields'], excel_saver)
-                    
-                    if current_page < max_pages:
-                        try:
-                            next_button = self.driver.find_element(By.CSS_SELECTOR, next_button_selector)
-                            next_button.click()
-                            time.sleep(2)
-                        except Exception as e:
-                            print(f"No se pudo encontrar o hacer clic en el botón de 'Siguiente': {e}")
-                            break
-                    
-                    current_page += 1
+                else:
+                    self.extract_field_data(site, details, excel_saver)
                 
                 # Save data to Excel after all pages are scraped
                 excel_saver.save_to_excel()
@@ -57,52 +58,26 @@ class WebScraper:
         finally:
             self.close()
 
-    def extract_field_data(self, site, fields, excel_saver):
-        max_results = 10
-        printed_results = 0
-        results = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
+    def extract_field_data(self, site, details, excel_saver):
         extracted_data_list = []
 
+        # Intentar extraer datos de elementos especificados en los campos si no se encontraron datos en la tabla
+        results = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
         for result in results:
-            if printed_results >= max_results:
-                break
             try:
                 extracted_data = {}
-                for field, selector in fields.items():
+                for field, selector in details['fields'].items():
                     try:
                         element = result.find_element(By.CSS_SELECTOR, selector)
                         extracted_data[field] = element.text
                     except Exception:
                         extracted_data[field] = "N/A"
-                
                 extracted_data_list.append(extracted_data)
-                printed_results += 1
             except Exception as e:
                 print(f"Error al extraer datos: {e}")
 
         excel_saver.add_data(site, extracted_data_list)
-        
-        if printed_results < max_results:
-            print(f"Solo se encontraron {printed_results} resultados válidos en {site}")
-
-    def extract_table_data(self, site, table_selector, excel_saver):
-        try:
-            print(f"Extrayendo datos de la tabla con selector {table_selector}")
-            table = self.driver.find_element(By.CSS_SELECTOR, table_selector)
-            rows = table.find_elements(By.TAG_NAME, 'tr')
-            extracted_data_list = []
-            
-            headers = [header.text for header in rows[0].find_elements(By.TAG_NAME, 'td')]
-            
-            for row in rows[1:]:
-                cells = row.find_elements(By.TAG_NAME, 'td')
-                row_data = {headers[i]: cells[i].text for i in range(len(cells))}
-                extracted_data_list.append(row_data)
-                
-            excel_saver.add_data(site, extracted_data_list)
-            
-        except Exception as e:
-            print(f"Error al extraer datos de la tabla: {e}")
+        print(f"Extraídos {len(extracted_data_list)} resultados válidos en {site}")
 
     def close(self):
         if self.driver:
