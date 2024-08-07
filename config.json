@@ -1,5 +1,5 @@
 {
-  "mercadolibre": {
+  "Merca": {
     "url": "https://www.mercadolibre.com.mx",
     "actions": [
       {
@@ -23,27 +23,35 @@
     },
     "max_pages": 2
   },
-  "FireEmblem": {
-    "url": "https://www.fireemblemwod.com/fe7.htm",
+  "cyberpuerta": {
+    "url": "https://www.cyberpuerta.mx",
     "actions": [
       {
-        "action": "click",
-        "selector": "a[href='fe7/personajesfe7.htm']"
+        "action": "send_keys",
+        "selector": "input[name='searchparam']",
+        "value": "Laptops"
       },
       {
-        "action": "click",
-        "selector": "a[href='personajes/Eliwood.htm']"
+        "action": "submit",
+        "selector": "form.search-form"
       }
     ],
     "fields": {
-      "Estadisticas": "Estadísticas",
-      "PV": "PV",
-      "Fue_Mag": "Fue, Mag",
-      "Hab": "Hab",
-      "Vel": "Vel",
-      "Sue": "Sue",
-      "Def": "Def",
-      "Res": "Res"
-    }
+      "title": ".emproduct_right_title",
+      "price": ".emproduct_right_price label.price",
+      "old_price": ".emproduct_right_price .oldPrice del",
+      "sku": ".emproduct_right_artnum",
+      "rating": ".cpreviews_stars_box_percent",
+      "reviews": ".reviews-total-txt a",
+      "processor": ".emproduct_right_attribute li:nth-child(1) .content",
+      "ram": ".emproduct_right_attribute li:nth-child(3) .content",
+      "storage": ".emproduct_right_attribute li:nth-child(4) .content",
+      "resolution": ".emproduct_right_attribute li:nth-child(5) .content",
+      "os": ".emproduct_right_attribute li:nth-child(7) .content"
+    },
+    "pagination": {
+      "next_button_selector": ".pager .next"
+    },
+    "max_pages": 2
   }
 }
