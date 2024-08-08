@@ -1,0 +1,52 @@
+{
+  "url": "https://www.mercadolibre.com.mx",
+  "fields": {
+    "Producto": "h2.ui-search-item__title",
+    "PrecioOriginal": "s[aria-roledescription='Precio']",
+    "PrecioConDescuent": ".ui-search-price__second-line span.andes-money-amount__fraction",
+    "Calificacion": "div.ui-search-reviews span.ui-search-reviews__rating-number"
+  },
+  "container_selector": ".ui-search-layout__item",
+  "pagination": {
+    "next_button_selector": ".andes-pagination__button.andes-pagination__button--next a",
+    "max_pages": 2
+  },
+  "search_sequences": [
+    {
+      "description": "MercadoLibre-Laptops",
+      "actions": [
+        {
+          "action": "send_keys",
+          "selector": "input[name='as_word']",
+          "value": "Laptops"
+        },
+        {
+          "action": "submit",
+          "selector": "form.nav-search"
+        }
+      ],
+      "extract_data": true,
+      "pagination": true
+    },
+    {
+      "description": "MercadoLibre-Celulares",
+      "actions": [
+        {
+          "action": "clear_field",
+          "selector": "input[name='as_word']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[name='as_word']",
+          "value": "Celulares"
+        },
+        {
+          "action": "submit",
+          "selector": "form.nav-search"
+        }
+      ],
+      "extract_data": true,
+      "pagination": false
+    }
+  ]
+}

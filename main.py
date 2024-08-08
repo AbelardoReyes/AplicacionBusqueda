@@ -1,4 +1,5 @@
 import json
+import os
 from web_scraper import WebScraper
 
 def load_config(file_path):
@@ -7,7 +8,15 @@ def load_config(file_path):
     return config
 
 if __name__ == "__main__":
-    config = load_config('config.json')
-    scraper = WebScraper(config)
-    scraper.scrape()
-    scraper.close()
+    json_directory = 'jsonConf'
+    config_files = ['datatable.json','mercadolibre.json', 'indeed.json']
+    
+    for config_file in config_files:
+        config_path = os.path.join(json_directory, config_file)
+        
+        config = load_config(config_path)
+        
+        scraper = WebScraper(config)
+        scraper.scrape()
+
+    print("Todas las secuencias de búsqueda han sido completadas.")

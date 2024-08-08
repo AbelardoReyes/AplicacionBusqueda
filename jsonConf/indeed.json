@@ -1,0 +1,87 @@
+{
+  "url": "https://www.indeed.com/",
+  "fields": {
+    "Puesto": "h2.jobTitle",
+    "Compañia": "span[data-testid='company-name']",
+    "Ubicación": "div[data-testid='text-location']",
+    "Salario": "div.css-1cvvo1b",
+    "Postulación": "span[data-testid='indeedApply']"
+  },
+  "container_selector": "li.css-5lfssm",
+  "pagination": {
+    "next_button_selector": "a[aria-label='Next']",
+    "max_pages": 2
+  },
+  "search_sequences": [
+    {
+      "description": "Indeed-Programador",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "input#text-input-what"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input#text-input-what",
+          "value": "Programador"
+        },
+        {
+          "action": "click",
+          "selector": "input#text-input-where"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input#text-input-where",
+          "value": "Torreon"
+        },
+        {
+          "action": "submit",
+          "selector": "button.yosegi-InlineWhatWhere-primaryButton"
+        }
+      ],
+      "extract_data": true,
+      "pagination": true
+    },
+    {
+      "description": "Indeed-Backend",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "input#text-input-what"
+        },
+        {
+          "action": "click",
+          "selector": "button.css-lbtjuw"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input#text-input-what",
+          "value": "Backend"
+        },
+        {
+          "action": "click",
+          "selector": "input#text-input-where"
+        },
+        {
+          "action": "click",
+          "selector": "button[aria-label='Clear location input']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input#text-input-where",
+          "value": "Monterrey"
+        },
+        {
+          "action": "submit",
+          "selector": "button.yosegi-InlineWhatWhere-primaryButton"
+        },
+        {
+          "action": "click",
+          "selector": "button[aria-label='cerrar']"
+        }
+      ],
+      "extract_data": true,
+      "pagination": false
+    }
+  ]
+}

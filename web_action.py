@@ -33,13 +33,12 @@ class WebAction:
         except (NoSuchElementException, TimeoutException) as e:
             print(f"Error: No se pudo encontrar el elemento con el selector {selector} para click. Detalles: {e}")
 
-    def click_cookie_banner(self):
+    def clear_field(self, selector):
         try:
-            cookie_button_selector = "button.cookie-consent-banner-opt-out__action"
-            cookie_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, cookie_button_selector)))
-            cookie_button.click()
+            element = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, selector)))
+            element.clear()  # Limpia el campo de texto
         except (NoSuchElementException, TimeoutException) as e:
-            print(f"Error: No se pudo encontrar el botón de aceptar cookies. Detalles: {e}")
+            print(f"Error: No se pudo encontrar el elemento con el selector {selector} para clear_field. Detalles: {e}")
 
     def execute_action(self, action, selector, value=None):
         if action == 'send_keys':
@@ -48,3 +47,5 @@ class WebAction:
             self.submit(selector)
         elif action == 'click':
             self.click(selector)
+        elif action == 'clear_field':
+            self.clear_field(selector)

@@ -1,0 +1,69 @@
+{
+  "url": "https://datatables.net/",
+  "fields": {
+    "Name": "td:nth-child(1)",
+    "Position": "td:nth-child(2)",
+    "Office": "td:nth-child(3)",
+    "Age": "td:nth-child(4)",
+    "Start Date": "td:nth-child(5)"
+  },
+  "container_selector": "table#example tbody tr",
+  "pagination": {
+    "next_button_selector": ".dt-paging-button.next",
+    "max_pages": 4
+  },
+  "search_sequences": [
+    {
+      "description": "dataTable-Search",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "select[name='example_length']"
+        },
+        {
+          "action": "click",
+          "selector": "select[name='example_length'] option[value='50']"
+        },
+        {
+          "action": "click",
+          "selector": "input[id='dt-search-0']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='dt-search-0']",
+          "value": "Javascript Developer"
+        }
+      ],
+      "extract_data": true,
+      "pagination": false
+    },
+    {
+      "description": "dataTable-Paginator",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "select[name='example_length']"
+        },
+        {
+          "action": "click",
+          "selector": "select[name='example_length'] option[value='10']"
+        },
+        {
+          "action": "click",
+          "selector": "input[id='dt-search-0']"
+        },
+        {
+          "action": "clear_field",
+          "selector": "input[id='dt-search-0']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='dt-search-0']",
+          "value": "\uE007"
+        }
+      ],
+      "extract_data": true,
+      "pagination": true
+    }
+  ]
+}
