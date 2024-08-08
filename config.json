@@ -1,5 +1,5 @@
 {
-  "Merca": {
+  "MercadoLibre": {
     "url": "https://www.mercadolibre.com.mx",
     "actions": [
       {
@@ -13,45 +13,35 @@
       }
     ],
     "fields": {
-      "title": ".ui-search-item__title",
-      "price": ".ui-search-price__second-line .andes-money-amount__fraction",
-      "list_currency": ".ui-search-price__second-line .andes-money-amount__currency-symbol",
-      "rating": ".ui-search-reviews__rating-number"
+      "title": "h2.ui-search-item__title",
+      "price": ".ui-search-price__second-line span.andes-money-amount__fraction"
     },
+    "container_selector": ".ui-search-layout__item",
     "pagination": {
       "next_button_selector": ".andes-pagination__button.andes-pagination__button--next a"
     },
     "max_pages": 2
   },
-  "cyberpuerta": {
-    "url": "https://www.cyberpuerta.mx",
+  "Amazon": {
+    "url": "https://www.amazon.com.mx/",
     "actions": [
       {
         "action": "send_keys",
-        "selector": "input[name='searchparam']",
+        "selector": "#twotabsearchtextbox",
         "value": "Laptops"
       },
       {
-        "action": "submit",
-        "selector": "form.search-form"
+        "action": "send_keys",
+        "selector": "#twotabsearchtextbox",
+        "value": "\n"
       }
     ],
     "fields": {
-      "title": ".emproduct_right_title",
-      "price": ".emproduct_right_price label.price",
-      "old_price": ".emproduct_right_price .oldPrice del",
-      "sku": ".emproduct_right_artnum",
-      "rating": ".cpreviews_stars_box_percent",
-      "reviews": ".reviews-total-txt a",
-      "processor": ".emproduct_right_attribute li:nth-child(1) .content",
-      "ram": ".emproduct_right_attribute li:nth-child(3) .content",
-      "storage": ".emproduct_right_attribute li:nth-child(4) .content",
-      "resolution": ".emproduct_right_attribute li:nth-child(5) .content",
-      "os": ".emproduct_right_attribute li:nth-child(7) .content"
+      "title": ".a-size-base-plus.a-color-base.a-text-normal"
     },
     "pagination": {
-      "next_button_selector": ".pager .next"
-    },
-    "max_pages": 2
+      "next_button_selector": ".s-pagination-next",
+      "max_pages": 2
+    }
   }
 }

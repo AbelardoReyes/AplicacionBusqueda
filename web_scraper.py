@@ -5,7 +5,9 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from excel_saver import ExcelSaver
 import time
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 class WebScraper:
     
     def __init__(self, config):
@@ -25,7 +27,7 @@ class WebScraper:
                     web_action.execute_action(action['action'], action.get('selector'), action.get('value'))
                     time.sleep(2)
                 
-                self.driver.implicitly_wait(5)
+                self.driver.implicitly_wait(10)
                 excel_saver = ExcelSaver(site)
                 
                 if 'pagination' in details and 'max_pages' in details:
@@ -60,24 +62,38 @@ class WebScraper:
 
     def extract_field_data(self, site, details, excel_saver):
         extracted_data_list = []
+    
+        # Usar el selector de contenedor especificado en config.json
+        container_selector = details.get('container_selector', '.ui-search-layout__item')
+        
+        try:
+            # Esperar a que los elementos del contenedor estén presentes
+            print(f"Buscando elementos en el contenedor con selector: {container_selector}")
+            wait = WebDriverWait(self.driver, 15)
+            results = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, container_selector)))
+    
+            for result in results:
+                try:
+                    extracted_data = {}
+                    for field, selector in details['fields'].items():
+                        try:
+                            element = result.find_element(By.CSS_SELECTOR, selector)
+                            extracted_data[field] = element.text
+                        except Exception as e:
+                            print(f"No se pudo encontrar el campo {field} con el selector {selector}. Detalles: {e}")
+                            extracted_data[field] = "N/A"
+                    extracted_data_list.append(extracted_data)
+                except Exception as e:
+                    print(f"Error al extraer datos: {e}")
+            
+            print(f"Extraídos {len(extracted_data_list)} resultados válidos en {site}")
+            excel_saver.add_data(site, extracted_data_list)
+        except TimeoutException:
+            print(f"Tiempo de espera agotado. No se pudieron encontrar los elementos con el selector {container_selector}")
+        except Exception as e:
+            print(f"Error general en extract_field_data: {e}")
 
-        # Intentar extraer datos de elementos especificados en los campos si no se encontraron datos en la tabla
-        results = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
-        for result in results:
-            try:
-                extracted_data = {}
-                for field, selector in details['fields'].items():
-                    try:
-                        element = result.find_element(By.CSS_SELECTOR, selector)
-                        extracted_data[field] = element.text
-                    except Exception:
-                        extracted_data[field] = "N/A"
-                extracted_data_list.append(extracted_data)
-            except Exception as e:
-                print(f"Error al extraer datos: {e}")
 
-        excel_saver.add_data(site, extracted_data_list)
-        print(f"Extraídos {len(extracted_data_list)} resultados válidos en {site}")
 
     def close(self):
         if self.driver:
