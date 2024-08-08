@@ -1,0 +1,52 @@
+{
+  "url": "https://getbootstrap.com/docs/5.3/forms/overview/",
+  "fields": {},
+  "container_selector": "",
+  "pagination": {
+    "next_button_selector": "",
+    "max_pages": 0
+  },
+  "search_sequences": [
+    {
+      "description": "dataTable-Search",
+      "actions": [
+        {
+          "action": "scroll_into_view",
+          "selector": "div.bd-example-snippet.bd-code-snippet"
+        },
+        {
+          "action": "click",
+          "selector": "input[id='exampleInputEmail1']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='exampleInputEmail1']",
+          "value": "example@gmail.com"
+        },
+        {
+          "action": "click",
+          "selector": "input[id='exampleInputPassword1']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='exampleInputPassword1']",
+          "value": "@$aSEa_1sB3"
+        },
+        {
+          "action": "click",
+          "selector": "input[id='exampleCheck1']"
+        },
+        {
+          "action": "click",
+          "selector": "button[type='submit']"
+        },
+        {
+          "action": "scroll_into_view",
+          "selector": "div.bd-example-snippet.bd-code-snippet"
+        }
+      ],
+      "extract_data": false,
+      "pagination": false
+    }
+  ]
+}

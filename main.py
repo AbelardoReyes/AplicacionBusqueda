@@ -9,7 +9,7 @@ def load_config(file_path):
 
 if __name__ == "__main__":
     json_directory = 'jsonConf'
-    config_files = ['datatable.json','mercadolibre.json', 'indeed.json']
+    config_files = ['formboostrap.json','datatable.json','mercadolibre.json', 'indeed.json']
     
     for config_file in config_files:
         config_path = os.path.join(json_directory, config_file)
