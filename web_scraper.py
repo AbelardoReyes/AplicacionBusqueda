@@ -60,39 +60,47 @@ class WebScraper:
                 except Exception as e:
                     print(f"No se pudo encontrar o hacer clic en el botón de 'Siguiente': {e}")
                     break
-                
             current_page += 1
 
     def extract_field_data(self, config, excel_saver, sequence):
         extracted_data_list = []
         container_selector = config.get('container_selector')
         fields = config.get('fields')
-        
+    
         try:
             print(f"Buscando elementos en el contenedor con selector: {container_selector}")
             wait = WebDriverWait(self.driver, 15)
             results = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, container_selector)))
-    
-            for result in results:
+
+            for result in results:  
                 try:
                     extracted_data = {}
+                    all_na = True  # Flag para verificar si todos los campos son "N/A"
+                
                     for field, selector in fields.items():
                         try:
                             element = result.find_element(By.CSS_SELECTOR, selector)
                             extracted_data[field] = element.text
+                            if element.text.strip():  # Si hay texto no vacío, cambia el flag
+                                all_na = False
                         except Exception as e:
                             print(f"No se pudo encontrar el campo {field} con el selector {selector}. Detalles: {e}")
                             extracted_data[field] = "N/A"
-                    extracted_data_list.append(extracted_data)
+
+                    if not all_na:  # Solo agrega si no todos los campos son "N/A"
+                        extracted_data_list.append(extracted_data)
+                    
                 except Exception as e:
                     print(f"Error al extraer datos: {e}")
-            
+
             print(f"Extraídos {len(extracted_data_list)} resultados válidos en {sequence['description']}")
             excel_saver.add_data(sequence['description'], extracted_data_list)
+        
         except TimeoutException:
             print(f"Tiempo de espera agotado. No se pudieron encontrar los elementos con el selector {container_selector}")
         except Exception as e:
             print(f"Error general en extract_field_data: {e}")
+
 
     def close(self):
         if self.driver:

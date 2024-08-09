@@ -1,0 +1,95 @@
+{
+  "url": "https://www.meteored.mx/",
+  "fields": {
+    "hora": "td:nth-child(2)",
+    "temp": "td:nth-child(5)",
+    "clima": "td:nth-child(6) strong",
+    "sensación": "td:nth-child(6) span",
+    "region": "td:nth-child(7) strong",
+    "viento": "td:nth-child(7) span",
+    "radiacion": "td:nth-child(8) strong",
+    "fps": "td:nth-child(8) span"
+  },
+  "container_selector": "table.tabla-horas tbody tr",
+  "pagination": {
+    "next_button_selector": ".dt-paging-button.next",
+    "max_pages": 4
+  },
+  "search_sequences": [
+    {
+      "description": "clima-Torreon",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "input[id='search_pc']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='search_pc']",
+          "value": "Torreon"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='search_pc']",
+          "value": "\uE007"
+        },
+        {
+          "action": "click",
+          "selector": "li.d2"
+        }
+      ],
+      "extract_data": true,
+      "pagination": false
+    },
+    {
+      "description": "clima-Monterrey",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "input[id='search_pc']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='search_pc']",
+          "value": "Monterrey"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='search_pc']",
+          "value": "\uE007"
+        },
+        {
+          "action": "click",
+          "selector": "li.d2"
+        }
+      ],
+      "extract_data": true,
+      "pagination": false
+    },
+    {
+      "description": "clima-Durango",
+      "actions": [
+        {
+          "action": "click",
+          "selector": "input[id='search_pc']"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='search_pc']",
+          "value": "Durango"
+        },
+        {
+          "action": "send_keys",
+          "selector": "input[id='search_pc']",
+          "value": "\uE007"
+        },
+        {
+          "action": "click",
+          "selector": "li.d2"
+        }
+      ],
+      "extract_data": true,
+      "pagination": false
+    }
+  ]
+}
